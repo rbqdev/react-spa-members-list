@@ -1,10 +1,17 @@
 import { api } from "@api/api";
 import { useEffect, useState } from "react";
 
+export type UseStatesProps = {
+  states: Record<string, string>;
+  statesSelected: string[];
+  setStatesSelected: React.Dispatch<React.SetStateAction<string[]>>;
+  isLoadingStates: boolean;
+};
+
 export const useStates = () => {
-  const [isLoadingStates, setIsLoadingStates] = useState(false);
   const [states, setStates] = useState<Record<string, string>>({});
   const [statesSelected, setStatesSelected] = useState<string[]>([]);
+  const [isLoadingStates, setIsLoadingStates] = useState(false);
 
   const getStates = async () => {
     setIsLoadingStates(true);
@@ -22,5 +29,5 @@ export const useStates = () => {
     statesSelected,
     setStatesSelected,
     isLoadingStates,
-  };
+  } as UseStatesProps;
 };

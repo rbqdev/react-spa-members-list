@@ -9,30 +9,25 @@ import { useStates } from "hooks/useStates";
 import { MembersListController } from "./components/MembersList/MembersListController";
 import { v4 as uuidv4 } from "uuid";
 import { SidebarFilterController } from "./components/SidebarFilter/SidebarFilterController";
+import { HomeContextProvider } from "./contexts/HomeContext";
 
 export function Home() {
-  const [membersListControllerKey, setMembersListControllerKey] = useState(
-    uuidv4()
-  );
-
   return (
-    <div className="relative">
-      <Header />
-      <PageTitle breadcrumbs={["Home", "Usuários"]} title="Lista de membros" />
-      <div className="flex justify-center min-h-[600px]">
-        <Content className="flex gap-4">
-          <SidebarFilterController
-            onSetMembersListControllerKey={() =>
-              setMembersListControllerKey(uuidv4())
-            }
-          />
-          <MembersListController
-            key={membersListControllerKey}
-            statesSelected={[]}
-          />
-        </Content>
+    <HomeContextProvider>
+      <div className="relative">
+        <Header />
+        <PageTitle
+          breadcrumbs={["Home", "Usuários"]}
+          title="Lista de membros"
+        />
+        <div className="flex justify-center">
+          <Content className="flex gap-4">
+            <SidebarFilterController />
+            <MembersListController />
+          </Content>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </HomeContextProvider>
   );
 }

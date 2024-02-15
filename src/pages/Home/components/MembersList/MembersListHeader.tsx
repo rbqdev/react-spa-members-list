@@ -6,27 +6,37 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@lib/shadcn/components/ui/dropdown-menu";
-import { maxMembersPerPage, orderByMap } from "@pages/Home/constants";
+import { maxMembersPerPage } from "@pages/Home/constants";
 import { OrderByType } from "@api/sharedTypes";
 import { ChevronDownIcon } from "lucide-react";
+
+const orderByMap = {
+  name: "Nome",
+  state: "Estado",
+  city: "Cidade",
+} as Record<string, string>;
 
 type MembersListHeaderProps = {
   orderedBy: string;
   totalMembers: number;
+  isLoading?: boolean;
   onOrderChange: (value: OrderByType) => void;
 };
 
 export const MembersListHeader = ({
   orderedBy,
   totalMembers,
+  isLoading,
   onOrderChange,
 }: MembersListHeaderProps) => (
   <div className="h-[60px] border rounded-sm flex justify-between items-center px-4">
     {/* Todo, change text, page 2 de total 20 */}
     <div className="text-sm">
-      Exibindo{" "}
-      {totalMembers < maxMembersPerPage ? totalMembers : maxMembersPerPage} de{" "}
-      {totalMembers} itens
+      {isLoading
+        ? "Buscando membros..."
+        : `Exibindo
+      ${totalMembers < maxMembersPerPage ? totalMembers : maxMembersPerPage} de
+      ${totalMembers} itens`}
     </div>
     <div className="flex items-center gap-2">
       <span className="text-sm font-semibold">Ordenar por:</span>

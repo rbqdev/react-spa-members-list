@@ -1,19 +1,13 @@
-import { useStates } from "hooks/useStates";
 import { SidebarFilter } from "./SidebarFilter";
-import { useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { defaultLimitStates } from "@pages/Home/constants";
+import { HomeContext } from "@pages/Home/contexts/HomeContext";
 
-type SidebarFilterControllerProps = {
-  onSetMembersListControllerKey: () => void;
-};
-
-export const SidebarFilterController = ({
-  onSetMembersListControllerKey,
-}: SidebarFilterControllerProps) => {
+export const SidebarFilterController = () => {
   const [shouldShowAllStates, setShouldShowAllStates] = useState(false);
 
   const { isLoadingStates, states, statesSelected, setStatesSelected } =
-    useStates();
+    useContext(HomeContext);
 
   const computedStates = useMemo(() => {
     const response = Object.keys(states);
@@ -31,7 +25,6 @@ export const SidebarFilterController = ({
       ? statesSelected.filter((state) => state !== value)
       : [...statesSelected, value];
     setStatesSelected(updatedStates);
-    onSetMembersListControllerKey();
   };
 
   return (

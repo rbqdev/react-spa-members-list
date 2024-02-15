@@ -28,7 +28,7 @@ export const MembersList = ({
   onPreviousPage,
 }: MembersListProps) => {
   return (
-    <section className="min-h-[1200px] flex-1">
+    <section className="flex-1 mb-24">
       {/* hidden: Semantic section heading */}
       <h3 className="hidden">Seção de membros</h3>
 
@@ -36,6 +36,7 @@ export const MembersList = ({
         <MembersListHeader
           orderedBy={orderedBy}
           totalMembers={totalMembers}
+          isLoading={isLoading}
           onOrderChange={onOrderChange}
         />
 

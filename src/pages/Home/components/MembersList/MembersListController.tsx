@@ -1,19 +1,18 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MembersList } from "./MembersList";
 import { Member, OrderByType } from "@api/sharedTypes";
 import { maxMembersPerPage } from "@pages/Home/constants";
 import { api } from "@api/api";
+import { HomeContext } from "@pages/Home/contexts/HomeContext";
 
-type MembersListControllerProps = { statesSelected: string[] };
-
-export const MembersListController = ({
-  statesSelected,
-}: MembersListControllerProps) => {
+export const MembersListController = () => {
   const [members, setMembers] = useState<Member[]>([]);
   const [totalMembers, setTotalMembers] = useState(0);
   const [isLoadingMembers, setIsLoadingMembers] = useState<boolean>(false);
   const [orderedBy, setOrderedBy] = useState<OrderByType>(OrderByType.NAME);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const { statesSelected } = useContext(HomeContext);
 
   const getMembers = async ({
     currentOffset = 0,

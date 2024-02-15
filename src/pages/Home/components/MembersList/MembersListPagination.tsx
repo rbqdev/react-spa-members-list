@@ -109,7 +109,7 @@ export const MembersListPagination = ({
   );
 
   return (
-    <Pagination className="mb-24">
+    <Pagination>
       <PaginationContent>
         <PaginationItem>
           <Button
@@ -119,7 +119,6 @@ export const MembersListPagination = ({
             disabled={isFirstPage}
           >
             <ArrowLeftIcon className="w-4 h-4" />
-            Anterior
           </Button>
         </PaginationItem>
 
@@ -132,7 +131,6 @@ export const MembersListPagination = ({
             disabled={isLastPage}
             onClick={nextPage}
           >
-            Próxima
             <ArrowRightIcon className="w-4 h-4" />
           </Button>
         </PaginationItem>
