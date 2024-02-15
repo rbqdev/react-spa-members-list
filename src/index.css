@@ -22,14 +22,14 @@ body {
     --background: 0 0% 100%;
     --foreground: 222.2 47.4% 11.2%;
 
-    --muted: 0deg 0% 96.08%;
-    --muted-foreground: 0deg 0% 69.02%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 47.4% 11.2%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --border: 0deg 0% 89.8%;
+    --input: 0deg 0% 89.8%;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 47.4% 11.2%;
@@ -49,6 +49,12 @@ body {
     --ring: 215 20.2% 65.1%;
 
     --radius: 0.5rem;
+
+    --jsm-muted: 0deg 0% 96.08%;
+    --jsm-muted-foreground: 0deg 0% 69.02%;
+
+    --jsm-dark: 0deg 0% 22.75%;
+    --jsm-dark-foreground: 0deg 0% 7.68%;
   }
 
   .dark {
@@ -82,6 +88,12 @@ body {
     --ring: 216 34% 17%;
 
     --radius: 0.5rem;
+
+    --jsm-muted: 0deg 0% 96.08%;
+    --jsm-muted-foreground: 0deg 0% 69.02%;
+
+    --jsm-dark: 0deg 0% 96.08%;
+    --jsm-dark-foreground: 0deg 0% 69.02%;
   }
 }
 
