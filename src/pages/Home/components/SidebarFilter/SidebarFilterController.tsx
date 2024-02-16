@@ -6,8 +6,13 @@ import { HomeContext } from "@pages/Home/contexts/HomeContext";
 export const SidebarFilterController = () => {
   const [shouldShowAllStates, setShouldShowAllStates] = useState(false);
 
-  const { isLoadingStates, states, statesSelected, setStatesSelected } =
-    useContext(HomeContext);
+  const {
+    isLoadingStates,
+    states,
+    statesSelected,
+    setStatesSelected,
+    setCurrentMembersListPage,
+  } = useContext(HomeContext);
 
   const computedStates = useMemo(() => {
     const response = Object.keys(states);
@@ -20,11 +25,16 @@ export const SidebarFilterController = () => {
     setShouldShowAllStates((value) => !value);
   };
 
+  const handleResetMembersListPages = () => {
+    setCurrentMembersListPage(1);
+  };
+
   const handleFilterItemCheckedChange = (value: string) => {
     const updatedStates = statesSelected.includes(value)
       ? statesSelected.filter((state) => state !== value)
       : [...statesSelected, value];
     setStatesSelected(updatedStates);
+    handleResetMembersListPages();
   };
 
   return (

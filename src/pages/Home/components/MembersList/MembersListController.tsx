@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { MembersList } from "./MembersList";
 import { Member, OrderByType } from "@api/sharedTypes";
 import { maxMembersPerPage } from "@pages/Home/constants";
@@ -10,30 +10,34 @@ export const MembersListController = () => {
   const [totalMembers, setTotalMembers] = useState(0);
   const [isLoadingMembers, setIsLoadingMembers] = useState<boolean>(false);
   const [orderedBy, setOrderedBy] = useState<OrderByType>(OrderByType.NAME);
-  const [currentPage, setCurrentPage] = useState(1);
+  const { statesSelected, currentMembersListPage, setCurrentMembersListPage } =
+    useContext(HomeContext);
 
-  const { statesSelected } = useContext(HomeContext);
-
-  const getMembers = async ({
-    currentOffset = 0,
-    currentOrderBy,
-  }: {
-    currentOffset?: number;
-    currentOrderBy?: OrderByType;
-    filterByStates?: string[];
-  }) => {
-    setIsLoadingMembers(true);
-    const offset = currentOffset ? (currentOffset - 1) * maxMembersPerPage : 0;
-    const { data, total } = await api.getMembers({
-      offset,
-      limit: maxMembersPerPage,
-      orderBy: currentOrderBy ? currentOrderBy : orderedBy,
-      filterByStates: statesSelected,
-    });
-    setMembers(data);
-    setTotalMembers(total);
-    setIsLoadingMembers(false);
-  };
+  const getMembers = useCallback(
+    async ({
+      currentOffset = 0,
+      currentOrderBy,
+    }: {
+      currentOffset?: number;
+      currentOrderBy?: OrderByType;
+      filterByStates?: string[];
+    }) => {
+      setIsLoadingMembers(true);
+      const offset = currentOffset
+        ? (currentOffset - 1) * maxMembersPerPage
+        : 0;
+      const { data, total } = await api.getMembers({
+        offset,
+        limit: maxMembersPerPage,
+        orderBy: currentOrderBy ? currentOrderBy : orderedBy,
+        filterByStates: statesSelected,
+      });
+      setMembers(data);
+      setTotalMembers(total);
+      setIsLoadingMembers(false);
+    },
+    [orderedBy, statesSelected]
+  );
 
   const handleOrderByChange = (value: OrderByType) => {
     setOrderedBy(value);
@@ -43,27 +47,25 @@ export const MembersListController = () => {
   };
 
   const handleNextPage = () => {
-    getMembers({
-      currentOffset: currentPage + 1,
-    });
-    setCurrentPage(currentPage + 1);
+    const currentOffset = currentMembersListPage + 1;
+    setCurrentMembersListPage(currentOffset);
+    getMembers({ currentOffset });
   };
 
   const handlePreviousPage = () => {
-    getMembers({
-      currentOffset: currentPage - 1,
-    });
-    setCurrentPage(currentPage - 1);
+    const currentOffset = currentMembersListPage - 1;
+    setCurrentMembersListPage(currentOffset);
+    getMembers({ currentOffset });
   };
 
   const handleGoToPage = (value: number) => {
-    setCurrentPage(value);
+    setCurrentMembersListPage(value);
     getMembers({ currentOffset: value });
   };
 
   useEffect(() => {
-    getMembers({ currentOffset: currentPage });
-  }, [currentPage, statesSelected]);
+    getMembers({ currentOffset: currentMembersListPage });
+  }, [currentMembersListPage, statesSelected]);
 
   return (
     <MembersList
@@ -71,7 +73,7 @@ export const MembersListController = () => {
       totalMembers={totalMembers}
       orderedBy={orderedBy}
       isLoading={isLoadingMembers}
-      currentPage={currentPage}
+      currentPage={currentMembersListPage}
       onOrderChange={handleOrderByChange}
       onGoToPage={handleGoToPage}
       onNextPage={handleNextPage}

@@ -1,28 +1,29 @@
-import Content from "@components/Content";
+import { Breadcrumbs } from "@components/Breadcrumbs/Breadcrumbs";
+import { Content } from "@components/Content/Content";
+import { Skeleton } from "@lib/shadcn/components/ui/skeleton";
 
 type PageTitleProps = {
   title: string;
   breadcrumbs: string[];
+  isLoading?: boolean;
 };
 
-const Breadcrumbs = ({ breadcrumbs }: Pick<PageTitleProps, "breadcrumbs">) => (
-  <div>
-    {breadcrumbs.map((crumb) => {
-      const isLast = crumb === breadcrumbs[breadcrumbs.length - 1];
-      return (
-        <span key={`crumb-${crumb}`} className="text-sm">{`${crumb}${
-          !isLast ? " > " : ""
-        }`}</span>
-      );
-    })}
-  </div>
-);
-
-export const PageTitle = ({ title, breadcrumbs = [] }: PageTitleProps) => (
-  <section className="flex justify-center py-6 mb-6">
-    <Content className="flex flex-col gap-8">
+export const PageTitle = ({
+  title,
+  breadcrumbs = [],
+  isLoading,
+}: PageTitleProps) => (
+  <Content className="flex flex-col gap-8">
+    <section>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <h2 className="text-3xl font-bold">{title}</h2>
-    </Content>
-  </section>
+      {isLoading ? (
+        <Skeleton
+          className="h-10 w-[220px]"
+          style={{ background: "hsl(var(--jsm-muted))" }}
+        />
+      ) : (
+        <h2 className="text-3xl font-bold capitalize">{title}</h2>
+      )}
+    </section>
+  </Content>
 );

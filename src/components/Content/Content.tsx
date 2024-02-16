@@ -7,6 +7,10 @@ type ContentProps = {
 
 export function Content({ className, children }: ContentProps) {
   return (
-    <div className={cn("w-full max-w-[1265px]", className)}>{children}</div>
+    <div className="flex justify-center">
+      <div className={cn("w-full max-w-[1265px] flex-1", className)}>
+        {children}
+      </div>
+    </div>
   );
 }

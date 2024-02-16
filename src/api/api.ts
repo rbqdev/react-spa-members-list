@@ -1,4 +1,4 @@
-import apiResults from "./apiResults.json";
+import apiData from "./apiData.json";
 import { Member, OrderByType } from "./sharedTypes";
 
 export const api = {
@@ -13,7 +13,7 @@ export const api = {
     offset?: number;
     orderBy?: OrderByType;
   } = {}) => {
-    const { results } = apiResults;
+    const { results } = apiData;
     let response = [...results] as Member[];
     let totalResults = results.length;
 
@@ -36,7 +36,7 @@ export const api = {
       totalResults = response.length;
     }
 
-    if (limit) {
+    if (limit || offset) {
       response = response.slice(
         offset,
         limit ? limit + offset : results.length
@@ -55,15 +55,34 @@ export const api = {
       total: totalResults,
     };
   },
-  getMembersByName: async ({ queryName }: { queryName: string }) => {
-    const { results } = apiResults;
+  getMemberByEmail: async ({ email }: { email?: string }) => {
+    const { results } = apiData;
+    let response = {} as Member | undefined;
+
+    response = results.find(({ email: innerEmail }) => innerEmail === email);
+
+    /* simulate api latency */
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(response);
+      }, Math.random() * 2000);
+    });
+
+    return {
+      data: response,
+    };
+  },
+  getMembersByName: async ({ search }: { search: string }) => {
+    const { results } = apiData;
     let response = [] as Member[];
     let totalResults = 0;
-
-    response = results.filter(
-      ({ name: { first, last } }) =>
-        first.indexOf(queryName) > -1 || last.indexOf(queryName) > -1
-    );
+    console.log({ search });
+    response = results.filter(({ name: { first, last } }) => {
+      return (
+        first.indexOf(search.toLowerCase()) > -1 ||
+        last.indexOf(search.toLowerCase()) > -1
+      );
+    });
     totalResults = response.length;
 
     /* simulate api latency */
@@ -79,7 +98,7 @@ export const api = {
     };
   },
   getStates: async () => {
-    const { results } = apiResults;
+    const { results } = apiData;
     const statesResponse = {} as Record<string, string>;
 
     results

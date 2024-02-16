@@ -30,7 +30,6 @@ export const MembersListHeader = ({
   onOrderChange,
 }: MembersListHeaderProps) => (
   <div className="h-[60px] border rounded-sm flex justify-between items-center px-4">
-    {/* Todo, change text, page 2 de total 20 */}
     <div className="text-sm">
       {isLoading
         ? "Buscando membros..."

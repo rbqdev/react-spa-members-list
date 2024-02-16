@@ -1,6 +1,8 @@
 import LogoSvg from "@assets/img/Logo";
-import Content from "@components/Content";
+import { Content } from "@components/Content/Content";
+
 import { Button } from "@lib/shadcn/components/ui/button";
+import { CommandDialog } from "@lib/shadcn/components/ui/command";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,21 +19,12 @@ import {
   SearchIcon,
   SettingsIcon,
 } from "lucide-react";
+import { Link } from "react-router-dom";
+import { SearchBarController } from "./components/SearchBarController";
 
 const Logo = () => (
   <div className="w-[148px]">
     <LogoSvg />
-  </div>
-);
-
-const SearchBar = () => (
-  <div className="relative">
-    <SearchIcon className="absolute left-4 top-4 h-4 w-4 opacity-60" />
-    <Input
-      placeholder="Buscar aqui"
-      className="pl-10 min-w-[454px] h-[48px] rounded-full"
-      // onFocus={onFocusSearchInput}
-    />
   </div>
 );
 
@@ -71,12 +64,14 @@ const UserNav = () => (
 export function Header() {
   return (
     <header
-      className="h-[96px] flex items-center justify-center px-12 sticky top-0 z-10"
+      className="h-[96px] min-h-[96px] flex items-center justify-center px-12 sticky top-0 z-10"
       style={{ background: "hsl(var(--jsm-muted))" }}
     >
       <Content className="flex items-center justify-between">
-        <Logo />
-        <SearchBar />
+        <Link to="/">
+          <Logo />
+        </Link>
+        <SearchBarController />
         <UserNav />
       </Content>
     </header>

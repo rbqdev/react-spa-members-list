@@ -28,7 +28,7 @@ export const MembersList = ({
   onPreviousPage,
 }: MembersListProps) => {
   return (
-    <section className="flex-1 mb-24">
+    <section className="flex-1">
       {/* hidden: Semantic section heading */}
       <h3 className="hidden">Seção de membros</h3>
 
@@ -42,10 +42,11 @@ export const MembersList = ({
 
         <div className="grid grid-cols-3 grid-flow-row gap-4 mb-6">
           {!isLoading &&
-            members.map(({ name, location, picture }) => (
+            members.map(({ name, email, location, picture }) => (
               <MembersListItem
                 key={`member-${name.first}-${name.last}`}
                 name={name}
+                email={email}
                 location={location}
                 picture={picture}
                 orderedBy={orderedBy}

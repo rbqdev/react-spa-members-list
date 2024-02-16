@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
+import { RouterProvider } from "react-router-dom";
+import { router } from "router";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -9,6 +10,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App />
+    <div className="app">
+      {/* hidden: Semantic app heading */}
+      <h1 className="hidden">Juntos Somos Mais - App</h1>
+      <RouterProvider router={router} />
+    </div>
   </React.StrictMode>
 );

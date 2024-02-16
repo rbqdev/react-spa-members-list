@@ -94,8 +94,8 @@ export const MembersListPagination = ({
   goToPage,
 }: MembersListPaginationProps) => {
   const pagesRounded = Math.trunc(totalMembers / maxMembersPerPage);
-  const restPages = (totalMembers / maxMembersPerPage) % 1;
-  const totalPages = restPages !== 0 ? pagesRounded + 1 : pagesRounded;
+  const calcRest = (totalMembers / maxMembersPerPage) % 1;
+  const totalPages = calcRest !== 0 ? pagesRounded + 1 : pagesRounded;
   const isFirstPage = currentPage === 1;
   const lastPageIndex = Math.min(
     totalPages,
@@ -103,7 +103,7 @@ export const MembersListPagination = ({
   );
   const isLastPage = currentPage === lastPageIndex;
 
-  const computedPages = useMemo(
+  const computedPaginationItems = useMemo(
     () => getPages({ currentPage, totalPages, lastPageIndex, goToPage }),
     [currentPage, goToPage, lastPageIndex, totalPages]
   );
@@ -111,27 +111,30 @@ export const MembersListPagination = ({
   return (
     <Pagination>
       <PaginationContent>
+        {/* hidden: Semantic app heading */}
+        <h4 className="hidden">Paginação de membros</h4>
+
         <PaginationItem>
           <Button
-            className="flex items-center gap-1"
-            variant="ghost"
-            onClick={previousPage}
+            variant="outline"
+            className="rounded-full w-[30px] h-[30px] py-0 px-0"
             disabled={isFirstPage}
+            onClick={previousPage}
           >
-            <ArrowLeftIcon className="w-4 h-4" />
+            <ArrowLeftIcon className="w-3 h-3" />
           </Button>
         </PaginationItem>
 
-        {computedPages.map((page) => page)}
+        {computedPaginationItems.map((page) => page)}
 
         <PaginationItem>
           <Button
-            className="flex items-center gap-1"
-            variant="ghost"
+            variant="outline"
+            className="rounded-full w-[30px] h-[30px] py-0 px-0"
             disabled={isLastPage}
             onClick={nextPage}
           >
-            <ArrowRightIcon className="w-4 h-4" />
+            <ArrowRightIcon className="w-3 h-3" />
           </Button>
         </PaginationItem>
       </PaginationContent>
