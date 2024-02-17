@@ -1,0 +1,48 @@
+.searchbar {
+  @apply relative;
+}
+.searchbar-icon {
+  @apply absolute left-4 top-4 h-4 w-4 opacity-60;
+}
+.searchbar-input {
+  @apply pl-10 min-w-[454px] h-[48px] rounded-full;
+}
+.searchbar-badge {
+  @apply absolute right-4 top-3.5 text-slate-400 text-[9px];
+}
+
+.loader {
+  @apply flex items-center justify-center w-full px-4 py-4 text-zinc-400;
+}
+.loader-content {
+  @apply flex items-center gap-2;
+}
+.loader-icon {
+  @apply h-4 w-4 animate-spin;
+}
+
+.empty-message {
+  @apply text-xs text-center px-4 py-4 text-zinc-400;
+}
+
+.results {
+  @apply max-h-[400px] overflow-auto;
+}
+.results-content {
+  @apply flex flex-col overflow-auto;
+}
+.results-label {
+  @apply uppercase text-xs py-2 px-4 text-zinc-400;
+}
+.results-item {
+  @apply flex items-center py-3 px-4 gap-2 hover:bg-muted cursor-pointer border-t border-t-zinc-100;
+}
+.results-item__name {
+  @apply capitalize;
+}
+.results-item__avatar {
+  @apply w-[50px] h-[50px] border;
+}
+.results-item-avatar__fallback {
+  @apply uppercase font-bold;
+}

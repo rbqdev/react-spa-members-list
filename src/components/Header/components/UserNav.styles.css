@@ -1,0 +1,6 @@
+.dropdown-menu-trigger {
+  @apply flex gap-2;
+}
+.dropdown-menu-trigger svg {
+  @apply w-4 h-4;
+}

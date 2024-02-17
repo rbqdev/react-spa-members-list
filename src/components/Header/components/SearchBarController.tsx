@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import debounce from "lodash.debounce";
 import { Link } from "react-router-dom";
 import { Loader2Icon } from "lucide-react";
+import "./SearchBar.styles.css";
 
 export const SearchBarController = () => {
   const [isSearchBarOpen, setIsSearcBarOpen] = useState(false);
@@ -55,21 +56,19 @@ export const SearchBarController = () => {
 
   return (
     <>
-      <div className="relative">
-        <SearchIcon className="absolute left-4 top-4 h-4 w-4 opacity-60" />
+      <div className="searchbar">
+        <SearchIcon className="searchbar-icon" />
         <Input
+          className="searchbar-input"
           placeholder="Buscar aqui"
-          className="pl-10 min-w-[454px] h-[48px] rounded-full"
           onFocus={onFocusSearchInput}
         />
-        <Badge
-          variant="secondary"
-          className="absolute right-4 top-3.5 text-slate-400 text-[9px]"
-        >
+        <Badge className="searchbar-badge" variant="secondary">
           Ctrl+J
         </Badge>
       </div>
 
+      {/* Modal Search */}
       <CommandDialog open={isSearchBarOpen} onOpenChange={setIsSearcBarOpen}>
         <CommandInput
           placeholder="Digite para pesquisar membros por nome..."
@@ -77,44 +76,40 @@ export const SearchBarController = () => {
         />
 
         {isLoading && (
-          <div className="flex items-center justify-center w-full px-4 py-4 text-zinc-400">
-            <div className="flex items-center gap-2">
-              <Loader2Icon className="h-4 w-4 animate-spin" />
+          <div className="loader">
+            <div className="loader-content">
+              <Loader2Icon className="loader-icon" />
               <span className="text-xs">Buscando membros...</span>
             </div>
           </div>
         )}
 
         {!isLoading && search && members.length === 0 && (
-          <div className="text-xs text-center px-4 py-4 text-zinc-400">
-            Nenhum membro encontrado!
-          </div>
+          <div className="empty-message">Nenhum membro encontrado!</div>
         )}
 
-        <div className="max-h-[400px] overflow-auto">
+        <div className="results">
           {!isLoading && members.length > 0 && (
-            <div className="flex flex-col overflow-auto">
-              <span className="uppercase text-xs py-2 px-4 text-zinc-400">
-                Membros encontrados:
-              </span>
+            <div className="results-content">
+              <span className="results-label">Membros encontrados:</span>
               {members.map(({ picture, name, email }) => (
                 <Link
                   to={`/member/${btoa(email)}`}
                   key={`search-${name.first}-${name.last}`}
-                  className="flex items-center py-3 px-4 gap-2 hover:bg-muted cursor-pointer border-t border-t-zinc-100"
+                  className="results-item"
                   onClick={onCloseSearchBar}
                 >
-                  <Avatar className="w-[50px] h-[50px] border">
+                  <Avatar className="results-item__avatar">
                     <AvatarImage
                       src={picture.large}
                       alt={`${name.first}-${name.last}`}
                     />
-                    <AvatarFallback className="uppercase font-bold">
+                    <AvatarFallback className="results-item__avatar-fallback">
                       {name.first.charAt(0)}
                       {name.last.charAt(0)}
                     </AvatarFallback>
                   </Avatar>
-                  <div className="capitalize">
+                  <div className="results-item__name">
                     {name.first} {name.last}
                   </div>
                 </Link>

@@ -1,0 +1,10 @@
+.page-title__content {
+  @apply flex flex-col gap-8 mb-8;
+}
+.page-title__h2 {
+  @apply text-3xl font-bold capitalize;
+}
+.page-title__skeleton {
+  @apply h-10 w-[250px] animate-pulse;
+  background: hsl(var(--jsm-muted));
+}

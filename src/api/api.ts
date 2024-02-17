@@ -76,20 +76,21 @@ export const api = {
   },
   getMembersByName: async ({ search }: { search: string }) => {
     const { results } = apiData;
-    let response = [] as Member[];
     let totalResults = 0;
+    const normalizedSearch = removeStringAccents(search);
 
-    response = results.filter(({ name: { first, last } }) => {
+    const response = results.filter(({ name: { first, last } }) => {
       const normalizedFirst = removeStringAccents(first);
       const normalizedLast = removeStringAccents(last);
       return (
         normalizedFirst
           .toLocaleLowerCase()
-          .indexOf(search.toLocaleLowerCase()) > -1 ||
-        normalizedLast.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) >
-          -1
+          .indexOf(normalizedSearch.toLocaleLowerCase()) > -1 ||
+        normalizedLast
+          .toLocaleLowerCase()
+          .indexOf(normalizedSearch.toLocaleLowerCase()) > -1
       );
-    });
+    }) as Member[];
 
     totalResults = response.length;
 

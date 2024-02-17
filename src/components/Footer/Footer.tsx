@@ -1,8 +1,8 @@
 import Logo from "@assets/img/Logo";
 import { Content } from "@components/Content/Content";
-import "./styles.css";
 import { InstagramLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import { FacebookIcon } from "lucide-react";
+import "./Footer.styles.css";
 
 export function Footer() {
   return (

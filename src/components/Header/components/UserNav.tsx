@@ -9,18 +9,19 @@ import {
   DropdownMenuTrigger,
 } from "@lib/shadcn/components/ui/dropdown-menu";
 import { ChevronDownIcon, LogOutIcon, SettingsIcon } from "lucide-react";
+import "./UserNav.styles.css";
 
 export const UserNav = () => (
   <DropdownMenu>
     <DropdownMenuTrigger asChild>
-      <Button variant="outline" className="flex gap-2">
+      <Button variant="outline" className="dropdown-menu-trigger">
         Robson Queiroz
-        <ChevronDownIcon className="w-4 h-4" />
+        <ChevronDownIcon />
       </Button>
     </DropdownMenuTrigger>
     <DropdownMenuContent className="w-56" align="end" forceMount>
-      <DropdownMenuLabel className="font-normal">
-        <div className="flex flex-col space-y-1">
+      <DropdownMenuLabel>
+        <div className="flex flex-col space-y-1 font-normal">
           <p className="text-sm font-medium leading-none">Robson Queiroz</p>
           <p className="text-xs leading-none text-muted-foreground">
             rqueiroz@juntossomosmais.com.br

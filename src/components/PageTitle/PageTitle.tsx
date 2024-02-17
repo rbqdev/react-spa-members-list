@@ -1,6 +1,7 @@
 import { Breadcrumbs } from "@components/Breadcrumbs/Breadcrumbs";
 import { Content } from "@components/Content/Content";
 import { Skeleton } from "@lib/shadcn/components/ui/skeleton";
+import "./PageTitle.styles.css";
 
 type PageTitleProps = {
   title: string;
@@ -13,16 +14,13 @@ export const PageTitle = ({
   breadcrumbs = [],
   isLoading,
 }: PageTitleProps) => (
-  <Content childNodeClassName="flex flex-col gap-8 mb-8">
+  <Content childNodeClassName="page-title__content">
     <section>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       {isLoading ? (
-        <Skeleton
-          className="h-10 w-[220px]"
-          style={{ background: "hsl(var(--jsm-muted))" }}
-        />
+        <Skeleton className="page-title__skeleton" />
       ) : (
-        <h2 className="text-3xl font-bold capitalize">{title}</h2>
+        <h2 className="page-title__h2">{title}</h2>
       )}
     </section>
   </Content>
