@@ -1,7 +1,10 @@
 import { Button } from "@lib/shadcn/components/ui/button";
-import { SidebarFilterItem, SidebarFilterSkeleton } from "./SidebarFilterItem";
+import {
+  MembersListSidebarItem,
+  MembersListSidebarItemSkeleton,
+} from "./MembersListSidebarItem";
 
-type SidebarFilterProps = {
+type MembersListSidebarProps = {
   items: string[];
   itemsSelected: string[];
   shouldShowAllItems: boolean;
@@ -10,20 +13,20 @@ type SidebarFilterProps = {
   onShowAllItems: () => void;
 };
 
-export const SidebarFilter = ({
+export const MembersListSidebar = ({
   items,
   isLoading,
   shouldShowAllItems,
   onItemCheckedChange,
   onShowAllItems,
-}: SidebarFilterProps) => {
+}: MembersListSidebarProps) => {
   return (
     <section className="min-w-[272px] max-h-[474px] min-h-[474px] border rounded-sm py-6 px-6 overflow-auto">
       <h3 className="text-lg font-medium">Por Estado</h3>
       <div className="flex flex-col gap-3 py-5">
         {!isLoading &&
           items.map((label) => (
-            <SidebarFilterItem
+            <MembersListSidebarItem
               key={`filter-${label}`}
               label={label}
               onItemCheckedChange={onItemCheckedChange}
@@ -31,7 +34,7 @@ export const SidebarFilter = ({
           ))}
         {isLoading &&
           [...new Array(4)].map((_, index) => (
-            <SidebarFilterSkeleton key={`filter-${index}`} />
+            <MembersListSidebarItemSkeleton key={`filter-${index}`} />
           ))}
       </div>
 

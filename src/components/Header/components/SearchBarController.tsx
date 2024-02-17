@@ -12,6 +12,7 @@ import { SearchIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import debounce from "lodash.debounce";
 import { Link } from "react-router-dom";
+import { Loader2Icon } from "lucide-react";
 
 export const SearchBarController = () => {
   const [isSearchBarOpen, setIsSearcBarOpen] = useState(false);
@@ -36,9 +37,9 @@ export const SearchBarController = () => {
 
     setIsLoading(true);
     const { data } = await api.getMembersByName({ search: currentSearch });
-    setIsLoading(false);
     setMembers(data);
-  }, 800);
+    setIsLoading(false);
+  }, 600);
 
   useEffect(() => {
     const openSearchWithCommand = (e: KeyboardEvent) => {
@@ -76,26 +77,31 @@ export const SearchBarController = () => {
         />
 
         {isLoading && (
-          <div className="px-4 py-4 text-zinc-500">Buscando membros...</div>
+          <div className="flex items-center justify-center w-full px-4 py-4 text-zinc-400">
+            <div className="flex items-center gap-2">
+              <Loader2Icon className="h-4 w-4 animate-spin" />
+              <span className="text-xs">Buscando membros...</span>
+            </div>
+          </div>
         )}
 
         {!isLoading && search && members.length === 0 && (
-          <div className="px-4 py-4 text-zinc-500">
+          <div className="text-xs text-center px-4 py-4 text-zinc-400">
             Nenhum membro encontrado!
           </div>
         )}
 
-        <div className="min-h-[80px] max-h-[400px] overflow-auto">
+        <div className="max-h-[400px] overflow-auto">
           {!isLoading && members.length > 0 && (
-            <div className="flex flex-col gap-4 overflow-auto">
-              <span className="uppercase text-xs py-2 bg-muted px-4">
+            <div className="flex flex-col overflow-auto">
+              <span className="uppercase text-xs py-2 px-4 text-zinc-400">
                 Membros encontrados:
               </span>
               {members.map(({ picture, name, email }) => (
                 <Link
                   to={`/member/${btoa(email)}`}
                   key={`search-${name.first}-${name.last}`}
-                  className="flex items-center py-2 px-4 hover:bg-muted cursor-pointer"
+                  className="flex items-center py-3 px-4 gap-2 hover:bg-muted cursor-pointer border-t border-t-zinc-100"
                   onClick={onCloseSearchBar}
                 >
                   <Avatar className="w-[50px] h-[50px] border">

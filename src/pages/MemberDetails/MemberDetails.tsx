@@ -87,13 +87,18 @@ export function MemberDetails() {
         if (isLoading) {
           return (
             <MemberDetailsItemSkeleton
+              key={`member-${label}`}
               customContentClass={
                 label === "Perfil" ? "h-[100px] w-[100px] rounded-full" : ""
               }
             />
           );
         }
-        return <MemberDetailsItem label={label}>{content}</MemberDetailsItem>;
+        return (
+          <MemberDetailsItem key={`member-${label}`} label={label}>
+            {content}
+          </MemberDetailsItem>
+        );
       })}
     </PageContainer>
   );

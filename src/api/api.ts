@@ -1,3 +1,4 @@
+import { removeStringAccents } from "@utils/removeStringAccents";
 import apiData from "./apiData.json";
 import { Member, OrderByType } from "./sharedTypes";
 
@@ -37,9 +38,10 @@ export const api = {
     }
 
     if (limit || offset) {
+      const currentOffset = offset ? (offset - 1) * (limit ?? 0) : 0;
       response = response.slice(
-        offset,
-        limit ? limit + offset : results.length
+        currentOffset,
+        limit ? limit + currentOffset : results.length
       );
     }
 
@@ -76,13 +78,19 @@ export const api = {
     const { results } = apiData;
     let response = [] as Member[];
     let totalResults = 0;
-    console.log({ search });
+
     response = results.filter(({ name: { first, last } }) => {
+      const normalizedFirst = removeStringAccents(first);
+      const normalizedLast = removeStringAccents(last);
       return (
-        first.indexOf(search.toLowerCase()) > -1 ||
-        last.indexOf(search.toLowerCase()) > -1
+        normalizedFirst
+          .toLocaleLowerCase()
+          .indexOf(search.toLocaleLowerCase()) > -1 ||
+        normalizedLast.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) >
+          -1
       );
     });
+
     totalResults = response.length;
 
     /* simulate api latency */

@@ -1,0 +1,28 @@
+.footer {
+  @apply min-h-[296px] py-8;
+  background: hsl(var(--jsm-dark));
+}
+
+.footer-content {
+  @apply w-full flex flex-col items-center justify-center gap-6;
+  color: white;
+}
+.footer-content svg {
+  @apply max-w-[176px];
+}
+
+.footer-content svg * {
+  fill: white;
+}
+
+.footer-logos {
+  @apply flex items-center gap-2;
+}
+
+.footer-logos__item {
+  @apply px-2 py-2 rounded-full bg-blue-500;
+}
+
+.footer-logos__item svg {
+  @apply w-4 h-4;
+}

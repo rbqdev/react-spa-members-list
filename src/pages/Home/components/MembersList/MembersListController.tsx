@@ -1,17 +1,23 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import { MembersList } from "./MembersList";
-import { Member, OrderByType } from "@api/sharedTypes";
+import { OrderByType } from "@api/sharedTypes";
 import { maxMembersPerPage } from "@pages/Home/constants";
 import { api } from "@api/api";
 import { HomeContext } from "@pages/Home/contexts/HomeContext";
 
 export const MembersListController = () => {
-  const [members, setMembers] = useState<Member[]>([]);
-  const [totalMembers, setTotalMembers] = useState(0);
-  const [isLoadingMembers, setIsLoadingMembers] = useState<boolean>(false);
-  const [orderedBy, setOrderedBy] = useState<OrderByType>(OrderByType.NAME);
-  const { statesSelected, currentMembersListPage, setCurrentMembersListPage } =
-    useContext(HomeContext);
+  const {
+    members,
+    totalMembers,
+    isLoadingMembers,
+    statesSelected,
+    currentMembersListPage,
+    orderedBy,
+    setMembers,
+    setTotalMembers,
+    setIsLoadingMembers,
+    setCurrentMembersListPage,
+  } = useContext(HomeContext);
 
   const getMembers = useCallback(
     async ({
@@ -23,11 +29,8 @@ export const MembersListController = () => {
       filterByStates?: string[];
     }) => {
       setIsLoadingMembers(true);
-      const offset = currentOffset
-        ? (currentOffset - 1) * maxMembersPerPage
-        : 0;
       const { data, total } = await api.getMembers({
-        offset,
+        offset: currentOffset,
         limit: maxMembersPerPage,
         orderBy: currentOrderBy ? currentOrderBy : orderedBy,
         filterByStates: statesSelected,
@@ -36,15 +39,14 @@ export const MembersListController = () => {
       setTotalMembers(total);
       setIsLoadingMembers(false);
     },
-    [orderedBy, statesSelected]
+    [
+      orderedBy,
+      setIsLoadingMembers,
+      setMembers,
+      setTotalMembers,
+      statesSelected,
+    ]
   );
-
-  const handleOrderByChange = (value: OrderByType) => {
-    setOrderedBy(value);
-    getMembers({
-      currentOrderBy: value,
-    });
-  };
 
   const handleNextPage = () => {
     const currentOffset = currentMembersListPage + 1;
@@ -74,7 +76,6 @@ export const MembersListController = () => {
       orderedBy={orderedBy}
       isLoading={isLoadingMembers}
       currentPage={currentMembersListPage}
-      onOrderChange={handleOrderByChange}
       onGoToPage={handleGoToPage}
       onNextPage={handleNextPage}
       onPreviousPage={handlePreviousPage}

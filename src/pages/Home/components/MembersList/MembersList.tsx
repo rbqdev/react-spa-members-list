@@ -1,8 +1,7 @@
 import { maxMembersPerPage } from "@pages/Home/constants";
 import { MembersListItem, MembersListItemSkeleton } from "./MembersListItem";
 import { MembersListPagination } from "./MembersListPagination";
-import { MembersListHeader } from "./MembersListHeader";
-import { Member, OrderByType } from "@api/sharedTypes";
+import { Member } from "@api/sharedTypes";
 
 type MembersListProps = {
   members: Member[];
@@ -10,7 +9,6 @@ type MembersListProps = {
   currentPage: number;
   orderedBy: string;
   isLoading?: boolean;
-  onOrderChange: (value: OrderByType) => void;
   onGoToPage: (value: number) => void;
   onNextPage: () => void;
   onPreviousPage: () => void;
@@ -22,7 +20,6 @@ export const MembersList = ({
   currentPage,
   isLoading,
   orderedBy,
-  onOrderChange,
   onGoToPage,
   onNextPage,
   onPreviousPage,
@@ -31,15 +28,7 @@ export const MembersList = ({
     <section className="flex-1">
       {/* hidden: Semantic section heading */}
       <h3 className="hidden">Seção de membros</h3>
-
       <div className="flex flex-col gap-4">
-        <MembersListHeader
-          orderedBy={orderedBy}
-          totalMembers={totalMembers}
-          isLoading={isLoading}
-          onOrderChange={onOrderChange}
-        />
-
         <div className="grid grid-cols-3 grid-flow-row gap-4 mb-6">
           {!isLoading &&
             members.map(({ name, email, location, picture }) => (

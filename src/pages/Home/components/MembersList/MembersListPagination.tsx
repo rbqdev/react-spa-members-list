@@ -117,7 +117,7 @@ export const MembersListPagination = ({
         <PaginationItem>
           <Button
             variant="outline"
-            className="rounded-full w-[30px] h-[30px] py-0 px-0"
+            className="rounded-full w-[30px] h-[30px] py-0 px-0 mr-3"
             disabled={isFirstPage}
             onClick={previousPage}
           >
@@ -130,7 +130,7 @@ export const MembersListPagination = ({
         <PaginationItem>
           <Button
             variant="outline"
-            className="rounded-full w-[30px] h-[30px] py-0 px-0"
+            className="rounded-full w-[30px] h-[30px] py-0 px-0 ml-3"
             disabled={isLastPage}
             onClick={nextPage}
           >

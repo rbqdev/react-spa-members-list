@@ -19,9 +19,7 @@ export const PageContainer = ({
   <div className="flex flex-col h-screen">
     <Header />
     <PageTitle breadcrumbs={breadcrumbs} title={title} isLoading={isLoading} />
-    <div className="flex justify-center flex-1 px-12 pb-24">
-      <Content>{children}</Content>
-    </div>
+    <Content parentNodeClassName="pb-12">{children}</Content>
     <Footer />
   </div>
 );

@@ -1,9 +1,9 @@
-import { SidebarFilter } from "./SidebarFilter";
+import { MembersListSidebar } from "./MembersListSidebar";
 import { useContext, useMemo, useState } from "react";
 import { defaultLimitStates } from "@pages/Home/constants";
 import { HomeContext } from "@pages/Home/contexts/HomeContext";
 
-export const SidebarFilterController = () => {
+export const MembersListSidebarController = () => {
   const [shouldShowAllStates, setShouldShowAllStates] = useState(false);
 
   const {
@@ -11,7 +11,7 @@ export const SidebarFilterController = () => {
     states,
     statesSelected,
     setStatesSelected,
-    setCurrentMembersListPage,
+    resetMembersListPages,
   } = useContext(HomeContext);
 
   const computedStates = useMemo(() => {
@@ -25,20 +25,16 @@ export const SidebarFilterController = () => {
     setShouldShowAllStates((value) => !value);
   };
 
-  const handleResetMembersListPages = () => {
-    setCurrentMembersListPage(1);
-  };
-
   const handleFilterItemCheckedChange = (value: string) => {
     const updatedStates = statesSelected.includes(value)
       ? statesSelected.filter((state) => state !== value)
       : [...statesSelected, value];
     setStatesSelected(updatedStates);
-    handleResetMembersListPages();
+    resetMembersListPages();
   };
 
   return (
-    <SidebarFilter
+    <MembersListSidebar
       items={computedStates}
       itemsSelected={statesSelected}
       isLoading={isLoadingStates}

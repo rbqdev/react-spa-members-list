@@ -13,7 +13,7 @@ export const PageTitle = ({
   breadcrumbs = [],
   isLoading,
 }: PageTitleProps) => (
-  <Content className="flex flex-col gap-8">
+  <Content childNodeClassName="flex flex-col gap-8 mb-8">
     <section>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       {isLoading ? (

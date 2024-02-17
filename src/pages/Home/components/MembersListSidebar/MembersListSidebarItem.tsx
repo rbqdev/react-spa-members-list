@@ -1,15 +1,15 @@
 import { Checkbox } from "@lib/shadcn/components/ui/checkbox";
 import { Skeleton } from "@lib/shadcn/components/ui/skeleton";
 
-type SidebarFilterItemProps = {
+type MembersListSidebarItemProps = {
   label: string;
   onItemCheckedChange: (value: string) => void;
 };
 
-export const SidebarFilterItem = ({
+export const MembersListSidebarItem = ({
   label,
   onItemCheckedChange,
-}: SidebarFilterItemProps) => {
+}: MembersListSidebarItemProps) => {
   return (
     <div className="flex items-center gap-2">
       <Checkbox id={label} onCheckedChange={() => onItemCheckedChange(label)} />
@@ -22,7 +22,7 @@ export const SidebarFilterItem = ({
   );
 };
 
-export const SidebarFilterSkeleton = () => {
+export const MembersListSidebarItemSkeleton = () => {
   return (
     <div className="flex items-center gap-2">
       <Skeleton
