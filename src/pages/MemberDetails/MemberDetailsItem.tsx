@@ -1,6 +1,7 @@
 import { Separator } from "@lib/shadcn/components/ui/separator";
 import { Skeleton } from "@lib/shadcn/components/ui/skeleton";
 import { cn } from "@lib/shadcn/utils";
+import "./MemberDetailsItem.styles.css";
 
 type MemberDetailsItemProps = {
   label: string;
@@ -11,9 +12,9 @@ export function MemberDetailsItem({ label, children }: MemberDetailsItemProps) {
   return (
     <>
       <Separator />
-      <div className="flex item-center gap-8 py-5">
-        <b className="flex items-center min-w-60">{label}</b>
-        <div className="flex items-center gap-4">{children}</div>
+      <div className="member-details-item">
+        <b className="member-details-item__label">{label}</b>
+        <div className="member-details-item__content">{children}</div>
       </div>
     </>
   );
@@ -27,17 +28,16 @@ export function MemberDetailsItemSkeleton({
   return (
     <>
       <Separator />
-      <div className="flex item-center gap-8 py-5">
-        <div className="flex items-center min-w-60">
-          <Skeleton
-            className="h-6 w-[100px]"
-            style={{ background: "hsl(var(--jsm-muted))" }}
-          />
+      <div className="member-details-item">
+        <div className="member-details-item__label">
+          <Skeleton className="member-details-item__label-skeleton" />
         </div>
-        <div className="flex items-center gap-4">
+        <div className="member-details-item__content">
           <Skeleton
-            className={cn("h-6 w-[200px]", customContentClass)}
-            style={{ background: "hsl(var(--jsm-muted))" }}
+            className={cn(
+              "member-details-item__content-skeleton",
+              customContentClass
+            )}
           />
         </div>
       </div>

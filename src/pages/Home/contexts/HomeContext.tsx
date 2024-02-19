@@ -1,6 +1,7 @@
 import { Member, OrderByType } from "@api/sharedTypes";
 import { UseStatesProps, useStates } from "hooks/useStates";
 import { createContext, useState } from "react";
+import { defaultCurrentPage } from "../constants";
 
 type ReacSetState<T> = React.Dispatch<React.SetStateAction<T>>;
 
@@ -28,12 +29,13 @@ export function HomeContextProvider({
   const [totalMembers, setTotalMembers] = useState(0);
   const [isLoadingMembers, setIsLoadingMembers] = useState<boolean>(false);
   const [orderedBy, setOrderedBy] = useState<OrderByType>(OrderByType.NAME);
-  const [currentMembersListPage, setCurrentMembersListPage] = useState(1);
+  const [currentMembersListPage, setCurrentMembersListPage] =
+    useState(defaultCurrentPage);
   const { isLoadingStates, states, statesSelected, setStatesSelected } =
     useStates();
 
   const resetMembersListPages = () => {
-    setCurrentMembersListPage(1);
+    setCurrentMembersListPage(defaultCurrentPage);
   };
 
   return (

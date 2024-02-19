@@ -1,0 +1,21 @@
+.member-details-item {
+  @apply flex items-center gap-8 py-5;
+}
+.member-details-item__label,
+.member-details-item__content {
+  @apply flex items-center;
+}
+.member-details-item__label {
+  @apply min-w-60;
+}
+.member-details-item__content {
+  @apply gap-4;
+}
+.member-details-item__label-skeleton {
+  @apply h-6 w-[100px];
+  background: hsl(var(--jsm-muted));
+}
+.member-details-item__content-skeleton {
+  @apply h-6 w-[200px];
+  background: hsl(var(--jsm-muted));
+}

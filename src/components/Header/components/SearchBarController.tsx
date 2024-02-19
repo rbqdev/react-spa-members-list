@@ -14,6 +14,7 @@ import debounce from "lodash.debounce";
 import { Link } from "react-router-dom";
 import { Loader2Icon } from "lucide-react";
 import "./SearchBar.styles.css";
+import { SearchBarItem } from "./SearchBarItem";
 
 export const SearchBarController = () => {
   const [isSearchBarOpen, setIsSearcBarOpen] = useState(false);
@@ -90,31 +91,19 @@ export const SearchBarController = () => {
 
         <div className="results">
           {!isLoading && members.length > 0 && (
-            <div className="results-content">
+            <ul className="results-content">
               <span className="results-label">Membros encontrados:</span>
               {members.map(({ picture, name, email }) => (
-                <Link
-                  to={`/member/${btoa(email)}`}
+                <SearchBarItem
                   key={`search-${name.first}-${name.last}`}
-                  className="results-item"
-                  onClick={onCloseSearchBar}
-                >
-                  <Avatar className="results-item__avatar">
-                    <AvatarImage
-                      src={picture.large}
-                      alt={`${name.first}-${name.last}`}
-                    />
-                    <AvatarFallback className="results-item__avatar-fallback">
-                      {name.first.charAt(0)}
-                      {name.last.charAt(0)}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="results-item__name">
-                    {name.first} {name.last}
-                  </div>
-                </Link>
+                  email={email}
+                  fistName={name.first}
+                  lastName={name.last}
+                  pictureUrl={picture.large}
+                  onCloseSearchBar={onCloseSearchBar}
+                />
               ))}
-            </div>
+            </ul>
           )}
         </div>
       </CommandDialog>

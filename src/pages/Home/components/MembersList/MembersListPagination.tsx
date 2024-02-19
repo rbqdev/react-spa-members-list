@@ -5,9 +5,10 @@ import {
   PaginationEllipsis,
   PaginationItem,
 } from "@lib/shadcn/components/ui/pagination";
-import { maxMembersPerPage } from "@pages/Home/constants";
+import { defaultCurrentPage, maxMembersPerPage } from "@pages/Home/constants";
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import React, { useMemo } from "react";
+import "./MembersListPagination.styles.css";
 
 type GetPaginationItemsProps = {
   totalPages: number;
@@ -22,7 +23,7 @@ const getPages = ({
   lastPageIndex,
   goToPage,
 }: GetPaginationItemsProps) => {
-  const maxPages = 5;
+  const maxPagesView = 5;
   const data = [] as React.ReactNode[];
 
   if (totalPages <= maxMembersPerPage) {
@@ -41,7 +42,7 @@ const getPages = ({
       );
     }
   } else {
-    const leftside = currentPage - maxPages / 2 > 1;
+    const leftside = currentPage - maxPagesView / 2 > 1;
     if (leftside) {
       data.push(
         <PaginationItem key="page-ellipsis-left">
@@ -50,7 +51,10 @@ const getPages = ({
       );
     }
 
-    const start = Math.max(1, Math.round(currentPage - maxPages / 2));
+    const start = Math.max(
+      defaultCurrentPage,
+      Math.round(currentPage - maxPagesView / 2)
+    );
     for (let index = start; index <= lastPageIndex; index++) {
       data.push(
         <PaginationItem key={`page-${index}`}>
@@ -65,7 +69,7 @@ const getPages = ({
       );
     }
 
-    const rightside = currentPage + maxPages / 2 < totalPages;
+    const rightside = currentPage + maxPagesView / 2 < totalPages;
     if (rightside) {
       data.push(
         <PaginationItem key="page-ellipsis-right">
@@ -96,13 +100,12 @@ export const MembersListPagination = ({
   const pagesRounded = Math.trunc(totalMembers / maxMembersPerPage);
   const calcRest = (totalMembers / maxMembersPerPage) % 1;
   const totalPages = calcRest !== 0 ? pagesRounded + 1 : pagesRounded;
-  const isFirstPage = currentPage === 1;
-  const lastPageIndex = Math.min(
-    totalPages,
-    Math.round(currentPage + maxMembersPerPage / 2)
+  const isFirstPage = currentPage === defaultCurrentPage;
+  const lastPageIndex = useMemo(
+    () => Math.min(totalPages, Math.round(currentPage + maxMembersPerPage / 2)),
+    [currentPage, totalPages]
   );
   const isLastPage = currentPage === lastPageIndex;
-
   const computedPaginationItems = useMemo(
     () => getPages({ currentPage, totalPages, lastPageIndex, goToPage }),
     [currentPage, goToPage, lastPageIndex, totalPages]
@@ -117,11 +120,11 @@ export const MembersListPagination = ({
         <PaginationItem>
           <Button
             variant="outline"
-            className="rounded-full w-[30px] h-[30px] py-0 px-0 mr-3"
+            className="pagination-arrow mr-3"
             disabled={isFirstPage}
             onClick={previousPage}
           >
-            <ArrowLeftIcon className="w-3 h-3" />
+            <ArrowLeftIcon className="pagination-arrow__icon" />
           </Button>
         </PaginationItem>
 
@@ -130,11 +133,11 @@ export const MembersListPagination = ({
         <PaginationItem>
           <Button
             variant="outline"
-            className="rounded-full w-[30px] h-[30px] py-0 px-0 ml-3"
+            className="pagination-arrow ml-3"
             disabled={isLastPage}
             onClick={nextPage}
           >
-            <ArrowRightIcon className="w-3 h-3" />
+            <ArrowRightIcon className="pagination-arrow__icon" />
           </Button>
         </PaginationItem>
       </PaginationContent>

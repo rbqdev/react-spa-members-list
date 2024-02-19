@@ -4,3 +4,15 @@
 .dropdown-menu-trigger svg {
   @apply w-4 h-4;
 }
+.dropdown-menu-label__content {
+  @apply flex flex-col space-y-1 font-normal;
+}
+.dropdown-menu-label__name {
+  @apply text-sm font-medium leading-none;
+}
+.dropdown-menu-label__email {
+  @apply text-xs leading-none text-muted-foreground;
+}
+.dropdown-menu-item {
+  @apply flex gap-2 cursor-pointer;
+}

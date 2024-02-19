@@ -8,6 +8,7 @@ import { Skeleton } from "@lib/shadcn/components/ui/skeleton";
 import { Member, OrderByType } from "@api/sharedTypes";
 import { cn } from "@lib/shadcn/utils";
 import { Link } from "react-router-dom";
+import "./MembersListItem.styles.css";
 
 type MembersListItemProps = Pick<
   Member,
@@ -23,30 +24,30 @@ export const MembersListItem = ({
   location,
   orderedBy,
 }: MembersListItemProps) => (
-  <article key={`member-${name.first}-${name.last}`}>
+  <li>
     <Link to={`/member/${btoa(email)}`}>
-      <Card className="min-h-[310px] min-w-[302px] flex justify-center items-center transition-all cursor-pointer hover:shadow-lg hover:-translate-y-1">
-        <CardContent className="flex flex-col justify-center items-center gap-5">
-          <Avatar className="w-[80px] h-[80px] border">
+      <Card className="members-list-item__card">
+        <CardContent className="members-list-item__card-content">
+          <Avatar className="members-list-item__avatar">
             <AvatarImage
               src={picture.large}
               alt={`${name.first}-${name.last}`}
             />
-            <AvatarFallback className="uppercase font-bold">
-              {name.first.charAt(0)}
-              {name.last.charAt(0)}
+            <AvatarFallback>
+              {name.first.charAt(0).toUpperCase()}
+              {name.last.charAt(0).toUpperCase()}
             </AvatarFallback>
           </Avatar>
-          <h4 className="text-xl font-bold capitalize">
+          <strong className="members-list-item__name">
             {name.first} {name.last}
-          </h4>
-          <p className="text-sm capitalize">{location.street}</p>
-          <div className="flex flex-col gap-1 text-xs text-center capitalize">
-            <p
+          </strong>
+          <p className="members-list-item__street">{location.street}</p>
+          <div className="members-list-item__city-content">
+            <span
               className={cn(orderedBy === OrderByType.CITY ? "font-bold" : "")}
             >
               {location.city}
-            </p>
+            </span>
             <p>
               <span
                 className={cn(
@@ -61,26 +62,26 @@ export const MembersListItem = ({
         </CardContent>
       </Card>
     </Link>
-  </article>
+  </li>
 );
 
 export const MembersListItemSkeleton = () => (
-  <div>
-    <Card className="min-h-[310px] min-w-[302px] flex justify-center items-center">
-      <CardContent className="flex flex-col justify-center items-center gap-6">
+  <li>
+    <Card className="members-list-item__card">
+      <CardContent className="members-list-item__card-content">
         <Avatar
-          className="w-[80px] h-[80px] animate-pulse"
+          className="members-list-item__avatar"
           style={{ background: "hsl(var(--jsm-muted))" }}
         />
         <Skeleton
-          className="h-6 w-[200px]"
+          className="h-6 w-[200px] animate-pulse"
           style={{ background: "hsl(var(--jsm-muted))" }}
         />
         <Skeleton
-          className="h-4 w-[200px]"
+          className="h-4 w-[200px] animate-pulse"
           style={{ background: "hsl(var(--jsm-muted))" }}
         />
-        <div className="flex flex-col items-center gap-2 text-xs text-center">
+        <div className="members-list-item__city-content">
           <Skeleton
             className="h-4 w-[80px] animate-pulse"
             style={{ background: "hsl(var(--jsm-muted))" }}
@@ -92,5 +93,5 @@ export const MembersListItemSkeleton = () => (
         </div>
       </CardContent>
     </Card>
-  </div>
+  </li>
 );

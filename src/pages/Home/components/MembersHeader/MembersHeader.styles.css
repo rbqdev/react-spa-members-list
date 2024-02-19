@@ -1,0 +1,15 @@
+.members-header {
+  @apply h-[60px] border rounded-sm flex justify-between items-center px-4;
+}
+.members-header__loader {
+  @apply flex items-center gap-2;
+}
+.members-header__loader svg {
+  @apply h-4 w-4 animate-spin;
+}
+.members-header__orderby {
+  @apply flex items-center gap-2;
+}
+.members-header__orderby-label {
+  @apply text-sm font-semibold;
+}

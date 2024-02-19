@@ -29,7 +29,7 @@ export const MembersList = ({
       {/* hidden: Semantic section heading */}
       <h3 className="hidden">Seção de membros</h3>
       <div className="flex flex-col gap-4">
-        <div className="grid grid-cols-3 grid-flow-row gap-4 mb-6">
+        <ul className="grid grid-cols-3 grid-flow-row gap-4 mb-6">
           {!isLoading &&
             members.map(({ name, email, location, picture }) => (
               <MembersListItem
@@ -44,9 +44,9 @@ export const MembersList = ({
 
           {isLoading &&
             [...new Array(maxMembersPerPage)].map((_, index) => (
-              <MembersListItemSkeleton key={`member-${index}`} />
+              <MembersListItemSkeleton key={`member-loading-${index}`} />
             ))}
-        </div>
+        </ul>
 
         {totalMembers > maxMembersPerPage && (
           <MembersListPagination

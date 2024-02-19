@@ -1,9 +1,9 @@
-import { MembersListSidebar } from "./MembersListSidebar";
+import { MembersSidebar } from "./MembersSidebar";
 import { useContext, useMemo, useState } from "react";
 import { defaultLimitStates } from "@pages/Home/constants";
 import { HomeContext } from "@pages/Home/contexts/HomeContext";
 
-export const MembersListSidebarController = () => {
+export const MembersSidebarController = () => {
   const [shouldShowAllStates, setShouldShowAllStates] = useState(false);
 
   const {
@@ -34,7 +34,7 @@ export const MembersListSidebarController = () => {
   };
 
   return (
-    <MembersListSidebar
+    <MembersSidebar
       items={computedStates}
       itemsSelected={statesSelected}
       isLoading={isLoadingStates}

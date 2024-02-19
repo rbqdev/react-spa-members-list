@@ -20,23 +20,21 @@ export const UserNav = () => (
       </Button>
     </DropdownMenuTrigger>
     <DropdownMenuContent className="w-56" align="end" forceMount>
-      <DropdownMenuLabel>
-        <div className="flex flex-col space-y-1 font-normal">
-          <p className="text-sm font-medium leading-none">Robson Queiroz</p>
-          <p className="text-xs leading-none text-muted-foreground">
-            rqueiroz@juntossomosmais.com.br
-          </p>
-        </div>
+      <DropdownMenuLabel className="dropdown-menu-label__content">
+        <p className="dropdown-menu-label__name">Robson Queiroz</p>
+        <p className="dropdown-menu-label__email">
+          rqueiroz@juntossomosmais.com.br
+        </p>
       </DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
-        <DropdownMenuItem className="flex gap-2 cursor-pointer">
+        <DropdownMenuItem className="dropdown-menu-item">
           <SettingsIcon className="w-4 h-4" />
           Configurações
         </DropdownMenuItem>
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
-      <DropdownMenuItem className="flex gap-2 cursor-pointer text-red-600">
+      <DropdownMenuItem className="dropdown-menu-item text-red-600">
         <LogOutIcon className="w-4 h-4" />
         Sair
       </DropdownMenuItem>
