@@ -1,0 +1,20 @@
+header {
+  @apply h-[96px] min-h-[96px] flex items-center sticky top-0 z-10 relative;
+  background: hsl(var(--jsm-muted));
+}
+.header-logo {
+  @apply w-[148px];
+}
+.header-content-child {
+  @apply flex items-center justify-between;
+}
+
+/* isMediumDevice */
+@media only screen and (max-width: 992px) {
+  .header-logo {
+    @apply absolute left-10 top-7;
+  }
+  .header-content-child {
+    @apply justify-end gap-2;
+  }
+}

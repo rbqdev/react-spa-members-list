@@ -2,6 +2,7 @@ import { maxMembersPerPage } from "@pages/Home/constants";
 import { MembersListItem, MembersListItemSkeleton } from "./MembersListItem";
 import { MembersListPagination } from "./MembersListPagination";
 import { Member } from "@api/sharedTypes";
+import "./MembersList.styles.css";
 
 type MembersListProps = {
   members: Member[];
@@ -28,8 +29,8 @@ export const MembersList = ({
     <section className="flex-1">
       {/* hidden: Semantic section heading */}
       <h3 className="hidden">Seção de membros</h3>
-      <div className="flex flex-col gap-4">
-        <ul className="grid grid-cols-3 grid-flow-row gap-4 mb-6">
+      <div className="members-list">
+        <ul className="members-list__content">
           {!isLoading &&
             members.map(({ name, email, location, picture }) => (
               <MembersListItem

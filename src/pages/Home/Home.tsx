@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { MembersListController } from "./components/MembersList/MembersListController";
-import { MembersSidebarController } from "./components/MembersSidebar/MembersSidebarController";
+import { MembersSidebarFilterController } from "./components/MembersSidebarFilter/MembersSidebarFilterController";
 import { HomeContextProvider } from "./contexts/HomeContext";
 import { PageContainer } from "@components/PageContainer/PageContainer";
 import { v4 as uuid } from "uuid";
 import { MembersHeader } from "./components/MembersHeader/MembersHeader";
+import "./Home.styles.css";
+import { useMediaQueries } from "@hooks/useMediaQueries";
 
 export function Home() {
   const [membersListControllerKey, setMembersListControllerKey] = useState(
@@ -16,9 +18,10 @@ export function Home() {
   return (
     <PageContainer breadcrumbs={["Home", "Membros"]} title="Lista de membros">
       <HomeContextProvider>
-        <div className="flex gap-4">
-          <MembersSidebarController />
-          <div className="flex flex-col gap-4 flex-1">
+        <div className="home-content">
+          <MembersSidebarFilterController />
+
+          <div className="home-content__list">
             <MembersHeader
               onOrderChange={handleResetMembersListControllerByOrderByChange}
             />

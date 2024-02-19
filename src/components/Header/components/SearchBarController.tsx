@@ -11,16 +11,49 @@ import { Input } from "@lib/shadcn/components/ui/input";
 import { SearchIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import debounce from "lodash.debounce";
-import { Link } from "react-router-dom";
 import { Loader2Icon } from "lucide-react";
 import "./SearchBar.styles.css";
 import { SearchBarItem } from "./SearchBarItem";
+import { useMediaQueries } from "hooks/useMediaQueries";
+import { Button } from "@lib/shadcn/components/ui/button";
+
+const SearchBarInputDesktop = ({
+  onFocusSearchInput,
+}: {
+  onFocusSearchInput: () => void;
+}) => (
+  <div className="searchbar">
+    <SearchIcon className="searchbar-icon" />
+    <Input
+      className="searchbar-input"
+      placeholder="Buscar aqui"
+      onFocus={onFocusSearchInput}
+    />
+    <Badge className="searchbar-badge" variant="secondary">
+      Ctrl+J
+    </Badge>
+  </div>
+);
+
+const SearchBarInputMobile = ({
+  onFocusSearchInput,
+}: {
+  onFocusSearchInput: () => void;
+}) => (
+  <Button variant="outline" size="icon">
+    <SearchIcon
+      className="searchbar-icon-mobile"
+      onClick={onFocusSearchInput}
+    />
+  </Button>
+);
 
 export const SearchBarController = () => {
   const [isSearchBarOpen, setIsSearcBarOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [members, setMembers] = useState([] as Member[]);
   const [search, setSearch] = useState("");
+  const { isMediumDevice } = useMediaQueries();
 
   const onFocusSearchInput = () => {
     setIsSearcBarOpen(true);
@@ -57,17 +90,11 @@ export const SearchBarController = () => {
 
   return (
     <>
-      <div className="searchbar">
-        <SearchIcon className="searchbar-icon" />
-        <Input
-          className="searchbar-input"
-          placeholder="Buscar aqui"
-          onFocus={onFocusSearchInput}
-        />
-        <Badge className="searchbar-badge" variant="secondary">
-          Ctrl+J
-        </Badge>
-      </div>
+      {isMediumDevice ? (
+        <SearchBarInputMobile onFocusSearchInput={onFocusSearchInput} />
+      ) : (
+        <SearchBarInputDesktop onFocusSearchInput={onFocusSearchInput} />
+      )}
 
       {/* Modal Search */}
       <CommandDialog open={isSearchBarOpen} onOpenChange={setIsSearcBarOpen}>

@@ -1,10 +1,13 @@
-import { MembersSidebar } from "./MembersSidebar";
+import { MembersSidebarFilter } from "./MembersSidebarFilter";
 import { useContext, useMemo, useState } from "react";
 import { defaultLimitStates } from "@pages/Home/constants";
 import { HomeContext } from "@pages/Home/contexts/HomeContext";
+import { useMediaQueries } from "@hooks/useMediaQueries";
+import { MembersDrawerFilter } from "./MembersDrawerFilter";
 
-export const MembersSidebarController = () => {
+export const MembersSidebarFilterController = () => {
   const [shouldShowAllStates, setShouldShowAllStates] = useState(false);
+  const { isMediumDevice } = useMediaQueries();
 
   const {
     isLoadingStates,
@@ -33,10 +36,16 @@ export const MembersSidebarController = () => {
     resetMembersListPages();
   };
 
-  return (
-    <MembersSidebar
-      items={computedStates}
+  return isMediumDevice ? (
+    <MembersDrawerFilter
+      items={Object.keys(states)}
       itemsSelected={statesSelected}
+      setStatesSelected={setStatesSelected}
+      onItemCheckedChange={handleFilterItemCheckedChange}
+    />
+  ) : (
+    <MembersSidebarFilter
+      items={computedStates}
       isLoading={isLoadingStates}
       shouldShowAllItems={shouldShowAllStates}
       onShowAllItems={handleShowAllStates}

@@ -1,0 +1,13 @@
+.home-content {
+  @apply flex gap-4;
+}
+.home-content__list {
+  @apply flex flex-col gap-4 flex-1;
+}
+
+/* isMediumDevice */
+@media only screen and (max-width: 992px) {
+  .home-content {
+    @apply flex-col;
+  }
+}

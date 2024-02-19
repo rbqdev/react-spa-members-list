@@ -2,8 +2,7 @@ import { Member, OrderByType } from "@api/sharedTypes";
 import { UseStatesProps, useStates } from "hooks/useStates";
 import { createContext, useState } from "react";
 import { defaultCurrentPage } from "../constants";
-
-type ReacSetState<T> = React.Dispatch<React.SetStateAction<T>>;
+import { ReacSetState } from "sharedTypes";
 
 type HomeContexProps = UseStatesProps & {
   members: Member[];

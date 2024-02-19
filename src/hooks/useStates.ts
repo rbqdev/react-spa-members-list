@@ -1,10 +1,11 @@
 import { api } from "@api/api";
 import { useEffect, useState } from "react";
+import { ReacSetState } from "sharedTypes";
 
 export type UseStatesProps = {
   states: Record<string, string>;
   statesSelected: string[];
-  setStatesSelected: React.Dispatch<React.SetStateAction<string[]>>;
+  setStatesSelected: ReacSetState<string[]>;
   isLoadingStates: boolean;
 };
 

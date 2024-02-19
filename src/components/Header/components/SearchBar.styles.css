@@ -1,8 +1,12 @@
 .searchbar {
   @apply relative;
 }
+.searchbar-icon,
+.searchbar-icon-mobile {
+  @apply h-4 w-4 opacity-60;
+}
 .searchbar-icon {
-  @apply absolute left-4 top-4 h-4 w-4 opacity-60;
+  @apply absolute left-4 top-4;
 }
 .searchbar-input {
   @apply pl-10 min-w-[454px] h-[48px] rounded-full;

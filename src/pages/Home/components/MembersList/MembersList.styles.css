@@ -1,0 +1,9 @@
+.members-list {
+  @apply flex flex-col gap-4;
+}
+.members-list__content {
+  @apply flex flex-wrap gap-4 mb-6;
+}
+.members-list__content li {
+  @apply flex-1;
+}

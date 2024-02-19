@@ -9,6 +9,7 @@ module.exports = {
       "@lib": path.resolve(__dirname, "./src/lib"),
       "@api": path.resolve(__dirname, "./src/api"),
       "@utils": path.resolve(__dirname, "./src/utils"),
+      "@hooks": path.resolve(__dirname, "./src/hooks"),
     },
   },
 };

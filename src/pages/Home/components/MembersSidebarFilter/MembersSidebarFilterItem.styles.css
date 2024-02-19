@@ -1,0 +1,9 @@
+.members-sidebar-filter-item {
+  @apply flex items-center gap-2;
+}
+.members-sidebar-filter-item__content {
+  @apply grid gap-1.5 leading-none cursor-pointer;
+}
+.members-sidebar-filter-item__label {
+  @apply text-sm cursor-pointer capitalize;
+}

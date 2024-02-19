@@ -19,3 +19,13 @@
   @apply h-6 w-[200px];
   background: hsl(var(--jsm-muted));
 }
+
+/* isMediumDevice */
+@media only screen and (max-width: 992px) {
+  .member-details-item {
+    @apply flex-col gap-1;
+  }
+  .member-details-item__label {
+    min-width: auto;
+  }
+}

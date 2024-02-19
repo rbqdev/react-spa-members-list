@@ -1,32 +1,32 @@
 import { Button } from "@lib/shadcn/components/ui/button";
 import {
-  MembersSidebarItem,
-  MembersSidebarItemSkeleton,
-} from "./MembersSidebarItem";
+  MembersSidebarFilterItem,
+  MembersSidebarFilterItemSkeleton,
+} from "./MembersSidebarFilterItem";
+import "./MembersSidebarFilter.styles.css";
 
-type MembersSidebarProps = {
+type MembersSidebarFilterProps = {
   items: string[];
-  itemsSelected: string[];
   shouldShowAllItems: boolean;
   isLoading?: boolean;
   onItemCheckedChange: (value: string) => void;
   onShowAllItems: () => void;
 };
 
-export const MembersSidebar = ({
+export const MembersSidebarFilter = ({
   items,
   isLoading,
   shouldShowAllItems,
   onItemCheckedChange,
   onShowAllItems,
-}: MembersSidebarProps) => {
+}: MembersSidebarFilterProps) => {
   return (
-    <section className="min-w-[272px] max-h-[474px] min-h-[474px] border rounded-sm py-6 px-6 overflow-auto">
-      <h3 className="text-lg font-medium">Por Estado</h3>
-      <div className="flex flex-col gap-3 py-5">
+    <aside className="members-sidebar-filter">
+      <h3 className="members-sidebar-filter__title">Por Estado</h3>
+      <div className="members-sidebar-filter__content">
         {!isLoading &&
           items.map((label) => (
-            <MembersSidebarItem
+            <MembersSidebarFilterItem
               key={`filter-${label}`}
               label={label}
               onItemCheckedChange={onItemCheckedChange}
@@ -34,19 +34,19 @@ export const MembersSidebar = ({
           ))}
         {isLoading &&
           [...new Array(4)].map((_, index) => (
-            <MembersSidebarItemSkeleton key={`filter-${index}`} />
+            <MembersSidebarFilterItemSkeleton key={`filter-${index}`} />
           ))}
       </div>
 
       {!isLoading && (
         <Button
           variant="link"
-          className="underline px-0 py-0"
+          className="members-sidebar-filter__button"
           onClick={onShowAllItems}
         >
           Ver {shouldShowAllItems ? "menos" : "todos"}
         </Button>
       )}
-    </section>
+    </aside>
   );
 };

@@ -3,25 +3,17 @@ import { Content } from "@components/Content/Content";
 import { Link } from "react-router-dom";
 import { SearchBarController } from "./components/SearchBarController";
 import { UserNav } from "./components/UserNav";
-
-const Logo = () => (
-  <div className="w-[148px]">
-    <LogoSvg />
-  </div>
-);
+import "./Header.styles.css";
 
 export function Header() {
   return (
-    <header
-      className="h-[96px] min-h-[96px] flex items-center sticky top-0 z-10"
-      style={{ background: "hsl(var(--jsm-muted))" }}
-    >
+    <header>
       <Content
         parentNodeClassName="w-full"
-        childNodeClassName="flex items-center justify-between "
+        childNodeClassName="header-content-child"
       >
         <Link to="/">
-          <Logo />
+          <LogoSvg className="header-logo" />
         </Link>
         <SearchBarController />
         <UserNav />

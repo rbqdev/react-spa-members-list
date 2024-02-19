@@ -16,3 +16,10 @@
 .members-list-item__city-content {
   @apply flex flex-col gap-1 items-center text-xs text-center capitalize;
 }
+
+/* isMediumDevice */
+@media only screen and (max-width: 992px) {
+  .members-list__content {
+    @apply flex gap-2 flex-wrap;
+  }
+}
