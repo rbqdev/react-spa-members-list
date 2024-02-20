@@ -29,6 +29,7 @@
   - Fake user menu avatar
   - Error handle when get a invalid email on Member Details page
   - Order by Name, City or State
+  - Page not found
 
 ## Available Scripts
 
