@@ -8,15 +8,25 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@lib/shadcn/components/ui/dropdown-menu";
-import { ChevronDownIcon, LogOutIcon, SettingsIcon } from "lucide-react";
+import { LogOutIcon, SettingsIcon } from "lucide-react";
 import "./UserNav.styles.css";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@lib/shadcn/components/ui/avatar";
 
 export const UserNav = () => (
   <DropdownMenu>
     <DropdownMenuTrigger asChild>
-      <Button variant="outline" className="dropdown-menu-trigger">
-        Robson Queiroz
-        <ChevronDownIcon />
+      <Button variant="ghost" className="dropdown-menu-trigger">
+        <Avatar>
+          <AvatarImage
+            src="https://ui.shadcn.com/avatars/03.png"
+            alt="@shadcn"
+          />
+          <AvatarFallback>RQ</AvatarFallback>
+        </Avatar>
       </Button>
     </DropdownMenuTrigger>
     <DropdownMenuContent className="w-56" align="end" forceMount>

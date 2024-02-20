@@ -1,8 +1,8 @@
 .dropdown-menu-trigger {
-  @apply flex gap-2;
+  @apply relative rounded-full;
 }
-.dropdown-menu-trigger svg {
-  @apply w-4 h-4;
+.dropdown-menu-trigger span {
+  @apply w-12 h-12;
 }
 .dropdown-menu-label__content {
   @apply flex flex-col space-y-1 font-normal;

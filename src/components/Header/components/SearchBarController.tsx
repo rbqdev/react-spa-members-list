@@ -35,11 +35,13 @@ const SearchBarInputMobile = ({
 }: {
   onFocusSearchInput: () => void;
 }) => (
-  <Button variant="outline" size="icon">
-    <SearchIcon
-      className="searchbar-icon-mobile"
-      onClick={onFocusSearchInput}
-    />
+  <Button
+    variant="ghost"
+    size="icon"
+    className="border"
+    onClick={onFocusSearchInput}
+  >
+    <SearchIcon className="searchbar-icon-mobile" />
   </Button>
 );
 
