@@ -2,7 +2,7 @@ import { Member, OrderByType } from "@api/sharedTypes";
 import { UseStatesProps, useStates } from "hooks/useStates";
 import { createContext, useState } from "react";
 import { defaultCurrentPage } from "../constants";
-import { ReacSetState } from "sharedTypes";
+import { ReactSetState } from "sharedTypes";
 
 type HomeContexProps = UseStatesProps & {
   members: Member[];
@@ -10,11 +10,11 @@ type HomeContexProps = UseStatesProps & {
   isLoadingMembers: boolean;
   orderedBy: OrderByType;
   currentMembersListPage: number;
-  setMembers: ReacSetState<Member[]>;
-  setTotalMembers: ReacSetState<number>;
-  setOrderedBy: ReacSetState<OrderByType>;
-  setIsLoadingMembers: ReacSetState<boolean>;
-  setCurrentMembersListPage: ReacSetState<number>;
+  setMembers: ReactSetState<Member[]>;
+  setTotalMembers: ReactSetState<number>;
+  setOrderedBy: ReactSetState<OrderByType>;
+  setIsLoadingMembers: ReactSetState<boolean>;
+  setCurrentMembersListPage: ReactSetState<number>;
   resetMembersListPages: () => void;
 };
 export const HomeContext = createContext({} as HomeContexProps);

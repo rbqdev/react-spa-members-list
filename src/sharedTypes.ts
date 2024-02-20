@@ -1,1 +1,1 @@
-export type ReacSetState<T> = React.Dispatch<React.SetStateAction<T>>;
+export type ReactSetState<T> = React.Dispatch<React.SetStateAction<T>>;

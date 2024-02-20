@@ -12,14 +12,14 @@ import {
   DrawerTrigger,
 } from "@lib/shadcn/components/ui/drawer";
 import { FilterIcon, Loader2Icon } from "lucide-react";
-import { ReacSetState } from "sharedTypes";
+import { ReactSetState } from "sharedTypes";
 import { Badge } from "@lib/shadcn/components/ui/badge";
 
 type MembersDrawerFilterProps = {
   items: string[];
   itemsSelected: string[];
   isLoading: boolean;
-  setStatesSelected: ReacSetState<string[]>;
+  setStatesSelected: ReactSetState<string[]>;
   onItemCheckedChange: (value: string) => void;
 };
 
