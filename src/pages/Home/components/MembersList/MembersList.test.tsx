@@ -41,7 +41,7 @@ describe("MembersList", () => {
       wrapper: BrowserRouter,
     });
 
-    const elements = screen.queryAllByTestId("paginationArrow");
-    expect(elements).toHaveLength(0);
+    const elements = screen.queryByTestId("paginationArrow");
+    expect(elements).not.toBeInTheDocument();
   });
 });

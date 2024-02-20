@@ -72,8 +72,8 @@ describe("MembersListPagination", () => {
   it("should show `paginationItemEllipsis` when have more than 6 pages", async () => {
     render(<MembersListPagination {...defaultValues} totalMembers={200} />);
 
-    const ellipsis = screen.getAllByTestId("paginationItemEllipsis");
+    const ellipsis = screen.getByTestId("paginationItemEllipsis");
 
-    expect(ellipsis[0]).toBeInTheDocument();
+    expect(ellipsis).toBeInTheDocument();
   });
 });
