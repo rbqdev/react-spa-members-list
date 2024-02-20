@@ -7,6 +7,11 @@
 - [ShadcnUI](https://ui.shadcn.com/)
 - [Tailwind](https://tailwindcss.com/)
 
+## Challenge guidelines
+- Following: https://github.com/juntossomosmais/frontend-guideline
+- Design of the project: https://www.figma.com/file/RG2Ro8NwAt1HsMASwbZcUx/Teste-Front-end-2?node-id=2%3A7938
+- Repo of the challenge: https://github.com/juntossomosmais/frontend-challenge?tab=readme-ov-file
+
 ## Project requirements covereged
 
 ### Main requirements
