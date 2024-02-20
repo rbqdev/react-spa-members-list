@@ -35,6 +35,7 @@ const getPages = ({
             variant={index === currentPage ? "outline" : "ghost"}
             disabled={index === currentPage}
             onClick={() => goToPage(index)}
+            data-testid="paginationItemButton"
           >
             {index}
           </Button>
@@ -45,7 +46,10 @@ const getPages = ({
     const leftside = currentPage - maxPagesView / 2 > 1;
     if (leftside) {
       data.push(
-        <PaginationItem key="page-ellipsis-left">
+        <PaginationItem
+          key="page-ellipsis-left"
+          data-testid="paginationItemEllipsis"
+        >
           <PaginationEllipsis className="text-slate-300" />
         </PaginationItem>
       );
@@ -62,6 +66,7 @@ const getPages = ({
             variant={index === currentPage ? "outline" : "ghost"}
             disabled={index === currentPage}
             onClick={() => goToPage(index)}
+            data-testid="paginationItemButton"
           >
             {index}
           </Button>
@@ -72,7 +77,10 @@ const getPages = ({
     const rightside = currentPage + maxPagesView / 2 < totalPages;
     if (rightside) {
       data.push(
-        <PaginationItem key="page-ellipsis-right">
+        <PaginationItem
+          key="page-ellipsis-right"
+          data-testid="paginationItemEllipsis"
+        >
           <PaginationEllipsis className="text-slate-300" />
         </PaginationItem>
       );
@@ -123,6 +131,7 @@ export const MembersListPagination = ({
             className="pagination-arrow mr-3"
             disabled={isFirstPage}
             onClick={previousPage}
+            data-testid="paginationArrow"
           >
             <ArrowLeftIcon className="pagination-arrow__icon" />
           </Button>
@@ -136,6 +145,7 @@ export const MembersListPagination = ({
             className="pagination-arrow ml-3"
             disabled={isLastPage}
             onClick={nextPage}
+            data-testid="paginationArrow"
           >
             <ArrowRightIcon className="pagination-arrow__icon" />
           </Button>

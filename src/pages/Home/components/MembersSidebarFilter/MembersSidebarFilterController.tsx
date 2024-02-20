@@ -40,6 +40,7 @@ export const MembersSidebarFilterController = () => {
     <MembersDrawerFilter
       items={Object.keys(states)}
       itemsSelected={statesSelected}
+      isLoading={isLoadingStates}
       setStatesSelected={setStatesSelected}
       onItemCheckedChange={handleFilterItemCheckedChange}
     />

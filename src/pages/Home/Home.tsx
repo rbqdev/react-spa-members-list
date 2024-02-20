@@ -6,7 +6,6 @@ import { PageContainer } from "@components/PageContainer/PageContainer";
 import { v4 as uuid } from "uuid";
 import { MembersHeader } from "./components/MembersHeader/MembersHeader";
 import "./Home.styles.css";
-import { useMediaQueries } from "@hooks/useMediaQueries";
 
 export function Home() {
   const [membersListControllerKey, setMembersListControllerKey] = useState(

@@ -2,6 +2,14 @@ import { removeStringAccents } from "@utils/removeStringAccents";
 import apiData from "./apiData.json";
 import { Member, OrderByType } from "./sharedTypes";
 
+const apiPromise = async (response: any) =>
+  await new Promise((resolve) => {
+    /* simulate api latency */
+    setTimeout(() => {
+      resolve(response);
+    }, Math.random() * 2000);
+  });
+
 export const api = {
   getMembers: async ({
     limit,
@@ -45,12 +53,7 @@ export const api = {
       );
     }
 
-    /* simulate api latency */
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(response);
-      }, Math.random() * 2000);
-    });
+    await apiPromise(response);
 
     return {
       data: response,
@@ -63,12 +66,7 @@ export const api = {
 
     response = results.find(({ email: innerEmail }) => innerEmail === email);
 
-    /* simulate api latency */
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(response);
-      }, Math.random() * 2000);
-    });
+    await apiPromise(response);
 
     return {
       data: response,
@@ -79,6 +77,7 @@ export const api = {
     let totalResults = 0;
     const normalizedSearch = removeStringAccents(search);
 
+    /** normalize strings to get strings independently of accents */
     const response = results.filter(({ name: { first, last } }) => {
       const normalizedFirst = removeStringAccents(first);
       const normalizedLast = removeStringAccents(last);
@@ -94,12 +93,7 @@ export const api = {
 
     totalResults = response.length;
 
-    /* simulate api latency */
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(response);
-      }, Math.random() * 2000);
-    });
+    await apiPromise(response);
 
     return {
       data: response,
@@ -118,12 +112,7 @@ export const api = {
         statesResponse[location.state] = location.state;
       });
 
-    /* simulate api latency */
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(statesResponse);
-      }, Math.random() * 2000);
-    });
+    await apiPromise(results);
 
     return {
       data: statesResponse as Record<string, string>,

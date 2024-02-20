@@ -24,7 +24,7 @@ export const MembersListItem = ({
   location,
   orderedBy,
 }: MembersListItemProps) => (
-  <li>
+  <li data-testid="membersListItem">
     <Link to={`/member/${btoa(email)}`}>
       <Card className="members-list-item__card">
         <CardContent className="members-list-item__card-content">
@@ -66,7 +66,7 @@ export const MembersListItem = ({
 );
 
 export const MembersListItemSkeleton = () => (
-  <li>
+  <li data-testid="membersListItemSkeleton">
     <Card className="members-list-item__card">
       <CardContent className="members-list-item__card-content">
         <Avatar

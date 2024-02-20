@@ -18,8 +18,14 @@ export const PageContainer = ({
 }: PageContainerProps) => (
   <div className="flex flex-col h-screen">
     <Header />
-    <PageTitle breadcrumbs={breadcrumbs} title={title} isLoading={isLoading} />
-    <Content parentNodeClassName="pb-12">{children}</Content>
+    <div className="flex flex-col flex-1">
+      <PageTitle
+        breadcrumbs={breadcrumbs}
+        title={title}
+        isLoading={isLoading}
+      />
+      <Content parentNodeClassName="pb-12">{children}</Content>
+    </div>
     <Footer />
   </div>
 );

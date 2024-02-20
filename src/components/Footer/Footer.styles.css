@@ -10,7 +10,6 @@
 .footer-content svg {
   @apply max-w-[176px];
 }
-
 .footer-content svg * {
   fill: white;
 }
@@ -18,11 +17,9 @@
 .footer-logos {
   @apply flex items-center gap-2;
 }
-
 .footer-logos__item {
   @apply px-2 py-2 rounded-full bg-blue-500;
 }
-
 .footer-logos__item svg {
   @apply w-4 h-4;
 }

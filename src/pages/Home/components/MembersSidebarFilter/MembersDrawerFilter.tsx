@@ -11,12 +11,14 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@lib/shadcn/components/ui/drawer";
-import { FilterIcon } from "lucide-react";
+import { FilterIcon, Loader2Icon } from "lucide-react";
 import { ReacSetState } from "sharedTypes";
+import { Badge } from "@lib/shadcn/components/ui/badge";
 
 type MembersDrawerFilterProps = {
   items: string[];
   itemsSelected: string[];
+  isLoading: boolean;
   setStatesSelected: ReacSetState<string[]>;
   onItemCheckedChange: (value: string) => void;
 };
@@ -24,6 +26,7 @@ type MembersDrawerFilterProps = {
 export const MembersDrawerFilter = ({
   items,
   itemsSelected,
+  isLoading,
   setStatesSelected,
   onItemCheckedChange,
 }: MembersDrawerFilterProps) => {
@@ -34,18 +37,30 @@ export const MembersDrawerFilter = ({
   return (
     <>
       <Drawer>
-        <DrawerTrigger className="border rounded-sm flex items-center justify-center py-3  gap-2 uppercase">
-          <FilterIcon className="w-4 h-4" />
-          <span className="text-xs font-medium">Filtrar por estado</span>
+        <DrawerTrigger asChild className="p-0">
+          <Button
+            variant="outline"
+            disabled={isLoading}
+            className="border rounded-sm flex items-center justify-center py-3 gap-2 uppercase"
+          >
+            {isLoading ? (
+              <Loader2Icon className="animate-spin h-4 w-4" />
+            ) : (
+              <FilterIcon className="w-4 h-4" />
+            )}
+
+            <span className="text-xs font-medium">Filtrar por estado</span>
+            {itemsSelected.length > 0 && <Badge>{itemsSelected.length}</Badge>}
+          </Button>
         </DrawerTrigger>
-        <DrawerContent className="max-h-[400px]">
+        <DrawerContent className="max-h-[350px]">
           <DrawerHeader>
             <DrawerDescription>
               Selecione um item para filtrar.
             </DrawerDescription>
           </DrawerHeader>
 
-          <div className="members-sidebar-filter__content px-6 overflow-auto">
+          <div className="members-sidebar-filter__content px-4">
             {items.map((label) => (
               <MembersSidebarFilterItem
                 key={`filter-${label}`}

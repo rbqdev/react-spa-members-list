@@ -5,7 +5,7 @@
   @apply text-lg font-medium;
 }
 .members-sidebar-filter__content {
-  @apply flex flex-col gap-3 py-5;
+  @apply flex flex-col gap-3 py-5 overflow-auto;
 }
 .members-sidebar-filter__button {
   @apply underline px-0 py-0;

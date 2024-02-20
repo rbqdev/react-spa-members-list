@@ -4,12 +4,13 @@ import { PageContainer } from "@components/PageContainer/PageContainer";
 import { AvatarFallback, AvatarImage } from "@lib/shadcn/components/ui/avatar";
 import { Separator } from "@lib/shadcn/components/ui/separator";
 import { Avatar } from "@radix-ui/react-avatar";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   MemberDetailsItem,
   MemberDetailsItemSkeleton,
 } from "./MemberDetailsItem";
+import { useToast } from "@lib/shadcn/components/ui/use-toast";
 
 const getDetailsItems = (member?: Member) => [
   {
@@ -59,19 +60,35 @@ const getDetailsItems = (member?: Member) => [
   },
 ];
 
-export function MemberDetails() {
+export function MemberDetailsController() {
   const [member, setMember] = useState<Member | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(false);
-  const { email: emailEncoded } = useParams();
+  const { email: emailEncoded = "" } = useParams();
+  const { toast } = useToast();
   const detailsItems = useMemo(() => getDetailsItems(member), [member]);
 
-  const getMember = async () => {
+  const getMember = useCallback(async () => {
     setIsLoading(true);
-    const email = atob(emailEncoded ?? "");
+    let email = "";
+    try {
+      email = atob(emailEncoded);
+    } catch {}
+
     const { data } = await api.getMemberByEmail({ email });
+
+    if (!data) {
+      toast({
+        variant: "destructive",
+        title: "Opa! Alguma coisa deu errado.",
+        description: "Usuário não encontrado.",
+      });
+      setTimeout(() => window.location.replace("/"), 2000);
+      return;
+    }
+
     setMember(data);
     setIsLoading(false);
-  };
+  }, [emailEncoded, toast]);
 
   useEffect(() => {
     getMember();

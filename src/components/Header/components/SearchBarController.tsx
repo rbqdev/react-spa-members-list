@@ -1,10 +1,5 @@
 import { api } from "@api/api";
 import { Member } from "@api/sharedTypes";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@lib/shadcn/components/ui/avatar";
 import { Badge } from "@lib/shadcn/components/ui/badge";
 import { CommandDialog, CommandInput } from "@lib/shadcn/components/ui/command";
 import { Input } from "@lib/shadcn/components/ui/input";
@@ -13,7 +8,7 @@ import { useEffect, useState } from "react";
 import debounce from "lodash.debounce";
 import { Loader2Icon } from "lucide-react";
 import "./SearchBar.styles.css";
-import { SearchBarItem } from "./SearchBarItem";
+import { SearchBarResultsItem } from "./SearchBarResultsItem";
 import { useMediaQueries } from "hooks/useMediaQueries";
 import { Button } from "@lib/shadcn/components/ui/button";
 
@@ -99,29 +94,32 @@ export const SearchBarController = () => {
       {/* Modal Search */}
       <CommandDialog open={isSearchBarOpen} onOpenChange={setIsSearcBarOpen}>
         <CommandInput
+          name="searchbar-modal-input"
           placeholder="Digite para pesquisar membros por nome..."
           onValueChange={handleChangeInput}
         />
 
         {isLoading && (
-          <div className="loader">
-            <div className="loader-content">
-              <Loader2Icon className="loader-icon" />
+          <div className="searchbar-loader">
+            <div className="searchbar-loader__content">
+              <Loader2Icon className="searchbar-loader__icon" />
               <span className="text-xs">Buscando membros...</span>
             </div>
           </div>
         )}
 
         {!isLoading && search && members.length === 0 && (
-          <div className="empty-message">Nenhum membro encontrado!</div>
+          <div className="searchbar-empty-list">Nenhum membro encontrado!</div>
         )}
 
-        <div className="results">
+        <div className="searchbar-results">
           {!isLoading && members.length > 0 && (
-            <ul className="results-content">
-              <span className="results-label">Membros encontrados:</span>
+            <ul className="searchbar-results__content">
+              <span className="searchbar-results__label">
+                Membros encontrados:
+              </span>
               {members.map(({ picture, name, email }) => (
-                <SearchBarItem
+                <SearchBarResultsItem
                   key={`search-${name.first}-${name.last}`}
                   email={email}
                   fistName={name.first}

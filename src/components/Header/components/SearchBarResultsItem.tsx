@@ -5,7 +5,7 @@ import {
 } from "@lib/shadcn/components/ui/avatar";
 import { Link } from "react-router-dom";
 
-type SearchBarItemProps = {
+type SearchBarResultsItemProps = {
   email: string;
   fistName: string;
   lastName: string;
@@ -13,28 +13,32 @@ type SearchBarItemProps = {
   onCloseSearchBar: () => void;
 };
 
-export const SearchBarItem = ({
+export const SearchBarResultsItem = ({
   email,
   fistName,
   lastName,
   pictureUrl,
   onCloseSearchBar,
-}: SearchBarItemProps) => {
+}: SearchBarResultsItemProps) => {
   return (
     <Link
-      className="results-item"
+      className="searchbar-results__item"
       to={`/member/${btoa(email)}`}
       key={`search-${fistName}-${lastName}`}
       onClick={onCloseSearchBar}
+      data-testid="searchBarItemLink"
     >
-      <Avatar className="results-item__avatar">
+      <Avatar className="searchbar-results__item-avatar">
         <AvatarImage src={pictureUrl} alt={`${fistName}-${lastName}`} />
-        <AvatarFallback className="results-item__avatar-fallback">
+        <AvatarFallback
+          className="searchbar-results__item-avatar-fallback"
+          data-testid="saerchbarAvatarFallback"
+        >
           {fistName.charAt(0)}
           {lastName.charAt(0)}
         </AvatarFallback>
       </Avatar>
-      <div className="results-item__name">
+      <div className="searchbar-results__item-name">
         {fistName} {lastName}
       </div>
     </Link>
