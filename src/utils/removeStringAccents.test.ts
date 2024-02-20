@@ -1,9 +1,12 @@
 import { removeStringAccents } from "./removeStringAccents";
 
 describe("removeStringAccents", () => {
-  it("should remove accents from a string", () => {
-    const mockString = "Coração";
-    const response = removeStringAccents(mockString);
-    expect(response).toEqual("Coracao");
+  it.each([
+    ["Coração", "Coracao"],
+    ["Parâmetro", "Parametro"],
+    ["Äçucar", "Acucar"],
+  ])("should remove accents from a string", (input, output) => {
+    const response = removeStringAccents(input);
+    expect(response).toEqual(output);
   });
 });
